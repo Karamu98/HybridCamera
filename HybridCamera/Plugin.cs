@@ -49,9 +49,35 @@ public class Plugin : IDalamudPlugin {
         PluginInterface.UiBuilder.OpenMainUi += Commands.ToggleConfig;
     }
 
-    private unsafe void DrawUI() {
+    private unsafe void DrawUI() 
+    {
         Windows.System.Draw();
+        UpdateCombatState();
         KeybindHook.UpdateKeybindHook();
+    }
+
+    private unsafe void UpdateCombatState()
+    {
+        if(!Globals.Config.functionInCombatOnly)
+        {
+            return;
+        }
+
+        bool playerInCombat = false;
+        if (ClientState != null)
+        {
+            if (ClientState.LocalPlayer != null)
+            {
+                playerInCombat = ClientState.LocalPlayer.StatusFlags.HasFlag(Dalamud.Game.ClientState.Objects.Enums.StatusFlags.InCombat);
+            }
+        }
+
+        if(Globals.InCombat && !playerInCombat)
+        {
+            GameConfig.UiControl.Set("MoveMode", (int)MovementMode.Standard);
+        }
+
+        Globals.InCombat = playerInCombat;
     }
 
 

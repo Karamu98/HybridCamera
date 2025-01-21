@@ -47,7 +47,13 @@ internal static class KeybindHook {
     }
 
     // assuming the config option is on
-    private static unsafe bool CheckStrafeKeybind(IntPtr ptr, KeybindID keybind) {
+    private static unsafe bool CheckStrafeKeybind(IntPtr ptr, KeybindID keybind) 
+    {
+        if(Globals.Config.functionInCombatOnly && !Globals.InCombat)
+        {
+            Hook.Original(ptr, keybind);
+        }
+
         if (keybind == KeybindID.StrafeLeft || keybind == KeybindID.StrafeRight) {
             if (Globals.Config.useTurnOnFrontpedal) {
                 if (Hook.Original(ptr, KeybindID.MoveForward)) {

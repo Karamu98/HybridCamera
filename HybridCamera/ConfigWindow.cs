@@ -26,6 +26,11 @@ public class ConfigWindow : WindowWrapper {
         ImGui.TextDisabled("General Settings");
 
         WindowDrawHelpers.DrawCheckboxTooltip(
+            "Enable functionality only in combat",
+            ref Globals.Config.functionInCombatOnly,
+            "The functionality of this plugin will only be activated once you're in combat.");
+
+        WindowDrawHelpers.DrawCheckboxTooltip(
             "Use turning on frontpedal (Forward smart strafe)",
             ref Globals.Config.useTurnOnFrontpedal,
             "Tries to make the character turn instead of strafe when you are frontpedaling. This slightly changes movement properties."

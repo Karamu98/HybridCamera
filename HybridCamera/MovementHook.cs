@@ -262,6 +262,11 @@ internal class MovementHook {
     {
         MovementDirectionUpdateHook.Original(thisx, wishdir_h, wishdir_v, rotatedir, align_with_camera, autorun, dont_rotate_with_camera);
 
+        if (Globals.Config.functionInCombatOnly && !Globals.InCombat)
+        {
+            return;
+        }
+
         if (Globals.Config.disableLRMouseMove && thisx->Unk_0x3F != 0 && thisx->WishdirChanged == 2 && *wishdir_v != 0)
         {
             thisx->Unk_0x3F = 0;

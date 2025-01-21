@@ -28,6 +28,7 @@ public class Configuration : IPluginConfiguration {
     [Obsolete] public TurnOnCameraTurn? useTurnOnCameraTurn = null;
     [Obsolete] public bool ControllerMode = false;
 
+    public bool functionInCombatOnly;
     public bool useTurnOnBackpedal;
     public bool useTurnOnFrontpedal;
     public bool useLegacyWhileMoving;
@@ -40,6 +41,7 @@ public class Configuration : IPluginConfiguration {
     #endregion
 
     public Configuration() {
+        functionInCombatOnly = false;
         useTurnOnBackpedal = true;
         useTurnOnFrontpedal = true;
         useLegacyWhileMoving = true;
